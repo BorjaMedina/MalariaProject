@@ -1,0 +1,3 @@
+# command line: ./fasta2oneline [file.fasta] 
+# will output another FASTA file in stdout (just pipe it to another file)
+awk '/^>/ {printf("\n%s\n",$0); next; } { printf("%s",$0,"\n");}  END {printf("\n");}' < $1
