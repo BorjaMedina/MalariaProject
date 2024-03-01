@@ -1,20 +1,21 @@
 #MALARIA PROJECT
 
-/	Species Host    Genome size     Genes   Genomic GC
-1	Plasmodium berghei	rodents 17954629	 7235
-2	Plasmodium cynomolgi    macaques        26181343	5787
-3	Plasmodium falciparum   humans  23270305	5207
-4	Plasmodium knowlesi     lemures 23462187	4953
-5	Plasmodium vivax        humans  27007701	5682
-6	Plasmodium yoelii	rodents 22222369	4889
-7	Haemoproteus tartakovskyi	birds   17340554	3746
-8	Toxoplasma gondii	humans  128105889	15892
+ | |	Species |Host |	Genome size     |Genes   |Genomic GC |
+ |---|-----------|---------------|--------|------|------|
+ | 1 |	Plasmodium berghei|	rodents| 17954629	| 7235| 0.23713
+ | 2 |	Plasmodium cynomolgi|    macaques|        26181343	|5787| 0.39078
+ | 3 |	Plasmodium falciparum|	humans|  23270305|	5207| 0.19364 
+ | 4 |	Plasmodium knowlesi|	lemures |23462187|	4953| 0.37541
+ | 5 |	Plasmodium vivax|        humans  |27007701|	5682| 0.42195
+ | 6 |	Plasmodium yoelii|	rodents |22222369|	4889| 0.20779
+ | 7 |	Haemoproteus tartakovskyi|	birds|   17340554	|3746| 0.259188
+ | 8 |	Toxoplasma gondii|	humans|  128105889	|15892| 0.521965
 
 
 1. Gene prediction with the reference genomes
 First of all we have to do a gene prediction using GeneMark for each genome files
 
-    gmes_petap.pl --ES --seq ../Genomes/Plasmodium_knowlesi.genome 
+		gmes_petap.pl --ES --seq ../Genomes/Plasmodium_knowlesi.genome 
 
 Exactly the same command for all of the genomes
 
@@ -24,7 +25,7 @@ We have to clean the sequencing data of Haemoproteus tartakovsky. The objective 
 We can create our own parser or use the one in the server. 
 With the one in the server would be:
 
-    python removeScaffold.py Haemoproteus_tartakovskyi.raw.genome 35 HaemoproteusFiltered.genome 3000
+		python removeScaffold.py Haemoproteus_tartakovskyi.raw.genome 35 HaemoproteusFiltered.genome 3000
 
 We have to choose a GC treshold. In this case we are using %GC= 35.
 Also we are filering for scaffolds smaller than 3000 nucleotides.
@@ -134,4 +135,32 @@ For runnign phylip you ahve ton create a file with all the trees, i used only th
 After that we run consense tree. When you run phylyp conense it will ask for the rest of parameters
 
 	phylip consense allTree -  rooted trees - 
+
+
+
+ Extended majority rule consensus tree
+
+	((Ht:206.0,((((Pc:206.0,Pv:206.0):120.0,Pk:206.0):174.0,(Pb:206.0,Py:206.0):201.0):67.0,Pf:206.0):124.0):206.0,Tg:206.0);
+
+CONSENSUS TREE:
+the numbers forks indicate the number
+of times the group consisting of the species
+which are to the right of that fork occurred
+among the trees, out of 206.00 trees
+
+         	  +---------------------------------------Ht
+        	  |
+         	  |                               +-------Pc
+         	  |                       +-120.0-|
+	  +-206.0-|               +-174.0-|       +-------Pv
+	  |       |               |       |
+	  |       |       +--67.0-|       +---------------Pk
+	  |       |       |       |
+	  |       |       |       |               +-------Pb
+	  |       +-124.0-|       +---------201.0-|
+	  |               |                       +-------Py
+	  |               |
+	  |               +-------------------------------Pf
+	  |
+	  +-----------------------------------------------Tg
 
